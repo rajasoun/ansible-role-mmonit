@@ -90,15 +90,6 @@
   notify: reload initctl
   when: ansible_distribution == 'Ubuntu'
 
-- name: 'Set M/Monit systemd unit file'
-  template:
-    src: mmonit.service
-    dest: /lib/systemd/system/mmonit.service
-    owner: root
-    group: root
-    mode: '0751'
-  notify: ['reload systemd', 'restart mmonit']
-
 - name: 'start M/Monit'
   service:
     name: 'mmonit'
