@@ -6,7 +6,3 @@
 - name: Secure mmonit with ssl
   include: ssl.yml
   tags: ['mmonit-ssl']
-
-- name: Configure mmonit
-  include: configure.yml
-  tags: ['mmonit-configure']
