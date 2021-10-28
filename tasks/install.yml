@@ -1,6 +1,6 @@
 ---
 
-- include_vars: "../files/secrets.yml"
+- include_vars: "../files/license.yml"
 
 - name: 'Set some facts'
   set_fact:
