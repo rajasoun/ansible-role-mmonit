@@ -1,0 +1,37 @@
+---
+- name: 'Fail when mmonit_admin_password or mmonit_connector_password is empty'
+  assert:
+    that:
+      - mmonit_admin_password != ''
+      - mmonit_connector_password != ''
+
+- name: 'Check if setup is required'
+  register: _mmonit_setup
+  stat:
+    path: '/etc/.mmonit_installed'
+
+- name: 'Generate setup script'
+  when: _mmonit_setup.stat.exists is not defined or _mmonit_setup.stat.exists == false
+  template:
+    src: 'setup.sh'
+    dest: '/opt/ansible-mmonit.sh'
+    mode: '0700'
+    owner: 'root'
+    group: 'root'
+
+- name: Check configuration
+  command: "{{ mmonit_executable }} -t"
+  changed_when: false
+
+- name: 'Run configuration script'
+  become: true
+  when: _mmonit_setup.stat.exists is not defined or _mmonit_setup.stat.exists == false
+  shell: '/opt/ansible-mmonit.sh'
+  tags: ['skip_ansible_lint']
+
+#- name: 'Cleanup'
+#  when: _mmonit_setup.stat.exists is not defined or _mmonit_setup.stat.exists == false
+#  file:
+#    path: '/opt/ansible-mmonit.sh'
+#    state: absent
+

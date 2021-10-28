@@ -1,0 +1,41 @@
+---
+mmonit_version: "3.7.9"
+
+mmonit_download_url: "https://mmonit.com/dist/mmonit-{{ mmonit_version }}-linux-x64.tar.gz"
+mmonit_download_checksum: "sha256:529b9e370e735b6dcc3c311ec3dd38ae504e3e22020ed67b256775031fc05f9b" 
+
+mmonit_server_ip: ''
+mmonit_server_hostname: 'localhost'
+mmonit_ssl_certificate: ''
+mmonit_ssl_certificate_key: ''
+
+mmonit_connectors:
+  - name: 'Default'
+    address: '*'
+    port: 2811
+    processors: 10
+
+#  - name: 'Secured'
+#    scheme: https
+#    address: '*'
+#    port: 8443
+#    processors: 10
+#    secure: true
+
+#mmonit_username: 'admin'
+#mmonit_password: 'swordfish'
+
+
+#mmonit_ansible_username: 'ansible'
+#mmonit_ansible_password: "{{ ansible_machine_id | hash('sha1') | hash('sha1') }}"
+
+
+mmonit_admin_username: 'admin'
+mmonit_admin_password: 'admin'
+
+mmonit_connector_username: 'monit'
+mmonit_connector_password: 'monit'
+
+mmonit_setup_url: ':{{ mmonit_connectors.0.scheme }}://{{ mmonit_server_hostname }}:{{ mmonit_connectors.0.port }}'
+
+#mmonit_ansible_password: "{{ ansible_machine_id | hash('sha1') }}"

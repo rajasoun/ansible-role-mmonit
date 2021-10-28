@@ -1,0 +1,16 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Raja Soundaramourty
+  description: Installs M/Monit on Ubuntu linux servers.
+  license: Apache
+  min_ansible_version: 2.11.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - Focal Fossa
+  galaxy_tags:
+    - ubuntu
+    - mmonit
+    - m/monit

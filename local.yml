@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  become: true
+  become_method: sudo
+
+  vars:
+    mmonit_server_ip: '127.0.0.1'
+
+  roles:
+    - role: '{{playbook_dir}}'

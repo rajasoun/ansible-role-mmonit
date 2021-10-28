@@ -1,0 +1,99 @@
+---
+- name: 'Set some facts'
+  set_fact:
+    mmonit_current_version: ''
+
+- name: 'Get current M/Monit version'
+  shell: "{{ mmonit_executable }} --version | cut -d ' ' -f2"
+  register: mmonit_current_version_output
+  changed_when: false
+  ignore_errors: true
+
+- name: 'Set mmonit_current_version fact'
+  set_fact:
+    mmonit_current_version: "{{ mmonit_current_version_output.stdout_lines | first }}"
+  when: mmonit_current_version_output.stdout_lines[0] is defined
+
+- name: 'Output mmonit_version'
+  debug: msg="{{ mmonit_version }}"
+
+- name: 'Output mmonit_current_version'
+  debug: msg="{{ mmonit_current_version }}"
+
+- name: 'Ensure M/Monit workspace exists'
+  file:
+    path: '{{ mmonit_workspace }}'
+    state: directory
+  when: mmonit_version != mmonit_current_version
+
+#- name: 'Download M/Monit'
+#  get_url:
+##    checksum: '{{ mmonit_download_checksum }}'
+#    url: '{{ mmonit_download_url }}'
+#    dest: '{{ mmonit_workspace }}/mmonit-latest.tar.gz'
+#  when: mmonit_version != mmonit_current_version
+
+- name: 'Unarchive mmonit-latest.tar.gz'
+  register: mmonit_unarchive
+  unarchive:
+    src: '{{ mmonit_download_url }}'
+    dest: '{{ mmonit_workspace }}'
+    copy: no
+  when: mmonit_version != mmonit_current_version
+
+- name: 'Symlink M/Monit to /opt/mmonit'
+  file:
+    src: '{{ mmonit_unarchive_dir }}'
+    dest: '{{ mmonit_workspace }}/mmonit'
+    owner: root
+    group: root
+    mode: 0700
+    state: link
+#    force: true
+
+- include_vars: "../files/license.yml"
+
+- name: 'Configure M/Monit'
+  notify: restart mmonit
+  template:
+    src: conf/server.xml
+    dest: '{{ mmonit_workspace }}/mmonit/conf/server.xml'
+    owner: root
+    group: root
+    mode: 0750
+
+- name: 'Run upgrade script'
+  shell:  /opt/mmonit-{{ mmonit_version }}/upgrade/upgrade -p /opt/mmonit-{{ mmonit_current_version }}
+  when: (mmonit_current_version is defined
+    and mmonit_version is defined
+    and mmonit_version != ""
+    and mmonit_current_version != ""
+    and mmonit_version | version_compare(mmonit_current_version, 'gt'))
+  tags: ['skip_ansible_lint']
+
+- name: 'Set M/Monit upstart script'
+  template:
+    src: mmonit.upstart
+    dest: /etc/init/mmonit.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: reload initctl
+  when: ansible_distribution == 'Ubuntu'
+
+- name: 'Set M/Monit systemd unit file'
+  template:
+    src: mmonit.service
+    dest: /lib/systemd/system/mmonit.service
+    owner: root
+    group: root
+    mode: '0751'
+  notify: ['reload systemd', 'restart mmonit']
+  when: ansible_distribution == 'Debian'
+
+- name: 'start M/Monit'
+  service:
+    name: 'mmonit'
+    state: started
+    enabled: yes
+  changed_when: false # fix idempotence

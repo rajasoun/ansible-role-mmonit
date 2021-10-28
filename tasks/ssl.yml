@@ -1,0 +1,34 @@
+---
+
+- name: Ensure ssl save paths exist
+  no_log: true
+  file:
+    path: '{{ mmonit_ssl_path }}'
+    state: directory
+    owner: root
+    group: root
+    mode: '0440'
+  when: mmonit_ssl_path is defined
+
+- name: Generate dhparam.pem if it does not exist
+  no_log: true
+  shell: openssl dhparam 2048 -out {{ mmonit_ssl_path }}/dhparam.pem
+  args:
+    creates: '{{ mmonit_ssl_path }}/dhparam.pem'
+  tags: ['skip_ansible_lint']
+
+- name: Read dhparam
+  command: cat {{ mmonit_ssl_path }}/dhparam.pem
+  register: mmonit_ssl_dhparam
+  changed_when: false
+
+- name: Generate monit.pem
+  no_log: true
+  notify: restart mmonit
+  template:
+    src: 'ssl/certificate.pem'
+    dest: '{{ mmonit_ssl_path }}/certificate.pem'
+    owner: root
+    group: root
+    mode: 0700
+  when: mmonit_ssl_certificate != '' and mmonit_ssl_certificate_key != ''
