@@ -12,7 +12,5 @@
     enabled: yes
 
 - name: reload systemd
-  command: systemctl daemon-reload
-
-- name: reload initctl
-  command: initctl reload-configuration
+  systemd:
+    daemon_reload: yes
