@@ -98,7 +98,6 @@
     group: root
     mode: '0751'
   notify: ['reload systemd', 'restart mmonit']
-  when: ansible_distribution == 'Debian'
 
 - name: 'start M/Monit'
   service:
