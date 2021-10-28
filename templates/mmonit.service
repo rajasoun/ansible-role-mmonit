@@ -1,0 +1,14 @@
+[Unit]
+Description = Easy, proactive monitoring of Unix systems, network and cloud services
+After = network.target
+
+[Service]
+Type=simple
+KillMode=process
+ExecStart = {{ mmonit_executable }} start
+ExecStop = {{ mmonit_executable }} stop
+PIDFile = {{ mmonit_pid_file }}
+Restart = on-abnormal
+
+[Install]
+WantedBy = multi-user.target

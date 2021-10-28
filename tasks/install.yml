@@ -76,24 +76,18 @@
     and mmonit_version is version_compare(mmonit_current_version, 'gt'))
   tags: ['skip_ansible_lint']
 
-- name: 'Create /etc/init For M/Monit upstart script'
-  file:
-    path: /etc/init
-    state: directory
-
-- name: 'Set M/Monit upstart script'
+- name: 'Set M/Monit systemd unit file'
   template:
-    src: mmonit.upstart
-    dest: /etc/init/mmonit.conf
+    src: mmonit.service
+    dest: /lib/systemd/system/mmonit.service
     owner: root
     group: root
-    mode: '0644'
-  notify: reload-configuration initctl
-  when: ansible_distribution == 'Ubuntu'
+    mode: '0751'
+  notify: ['reload systemd', 'restart mmonit']
 
 - name: 'start M/Monit'
   service:
     name: 'mmonit'
     state: started
     enabled: yes
-  changed_when: false 
+  changed_when: false # fix idempotence
