@@ -1,7 +1,4 @@
 ---
-
-- include_vars: "../files/secrets.yml"
-
 - name: 'Set some facts'
   set_fact:
     mmonit_current_version: ''
@@ -37,13 +34,13 @@
     copy: no
   when: mmonit_version != mmonit_current_version
 
-- name: 'Read License'
+- name: 'Read trial license'
   shell: "head -n -2 {{ mmonit_unarchive_dir }}/conf/server.xml | tail -n5 | awk '{$1=$1};1'"
   register: mmonit_trial_license
   changed_when: false
   when: mmonit_license == ''
 
-- name: Set License
+- name: set trial license
   set_fact:
     mmonit_license: '{{ mmonit_trial_license.stdout }}'
   when: mmonit_license == ''

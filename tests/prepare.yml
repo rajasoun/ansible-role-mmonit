@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+
+  pre_tasks:
+    - name: Install apt packages for testing
+      apt:
+        pkg: '{{ packages }}'
+        update_cache: yes
+      vars:
+        packages:
+          - curl
+          - telnet
+  

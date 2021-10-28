@@ -1,9 +1,12 @@
 
-- include: install.yml
+- name: Install mmonit
+  include: install.yml
   tags: ['mmonit-install']
 
-- include: ssl.yml
+- name: Secure mmonit with ssl
+  include: ssl.yml
   tags: ['mmonit-ssl']
 
-- include: configure.yml
+- name: Configure mmonit
+  include: configure.yml
   tags: ['mmonit-configure']

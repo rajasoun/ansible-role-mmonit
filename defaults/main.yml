@@ -4,6 +4,9 @@ mmonit_version: "3.7.9"
 mmonit_download_url: "https://mmonit.com/dist/mmonit-{{ mmonit_version }}-linux-x64.tar.gz"
 mmonit_download_checksum: "sha256:529b9e370e735b6dcc3c311ec3dd38ae504e3e22020ed67b256775031fc05f9b" 
 
+mmonit_license_owner: ""
+mmonit_license: ''
+
 mmonit_server_ip: ''
 mmonit_server_hostname: 'localhost'
 mmonit_ssl_certificate: ''
@@ -11,6 +14,7 @@ mmonit_ssl_certificate_key: ''
 
 mmonit_connectors:
   - name: 'Default'
+    scheme: http
     address: '*'
     port: 2811
     processors: 10
@@ -21,6 +25,13 @@ mmonit_connectors:
 #    port: 8443
 #    processors: 10
 #    secure: true
+
+
+mmonit_admin_username: 'admin'
+mmonit_admin_password: ''
+
+mmonit_connector_username: 'connector'
+mmonit_connector_password: ''
 
 mmonit_setup_url: ':{{ mmonit_connectors.0.scheme }}://{{ mmonit_server_hostname }}:{{ mmonit_connectors.0.port }}'
 mmonit_dhparam_size: 2048

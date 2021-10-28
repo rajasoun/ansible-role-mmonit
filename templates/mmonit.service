@@ -3,10 +3,10 @@ Description = Easy, proactive monitoring of Unix systems, network and cloud serv
 After = network.target
 
 [Service]
-Type=simple
-KillMode=process
+Type=forking
 ExecStart = {{ mmonit_executable }} start
 ExecStop = {{ mmonit_executable }} stop
+#ExecReload = {{ mmonit_executable }} stop; {{ mmonit_executable }} start
 PIDFile = {{ mmonit_pid_file }}
 Restart = on-abnormal
 

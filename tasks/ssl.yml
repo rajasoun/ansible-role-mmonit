@@ -11,11 +11,9 @@
   when: mmonit_ssl_path is defined
 
 - name: Generate dhparam.pem if it does not exist
-  no_log: true
-  shell: openssl dhparam 2048 -out {{ mmonit_ssl_path }}/dhparam.pem
-  args:
-    creates: '{{ mmonit_ssl_path }}/dhparam.pem'
-  tags: ['skip_ansible_lint']
+  openssl_dhparam:
+    path: '{{ mmonit_ssl_path }}/dhparam.pem'
+    size: '{{ mmonit_dhparam_size }}'
 
 - name: Read dhparam
   command: cat {{ mmonit_ssl_path }}/dhparam.pem
