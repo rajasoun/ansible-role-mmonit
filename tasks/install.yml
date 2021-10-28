@@ -1,4 +1,7 @@
 ---
+
+- include_vars: "../files/secrets.yml"
+
 - name: 'Set some facts'
   set_fact:
     mmonit_current_version: ''
