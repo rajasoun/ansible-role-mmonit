@@ -72,6 +72,7 @@
     and mmonit_current_version != ""
     and mmonit_version is version_compare(mmonit_current_version, 'gt'))
   tags: ['skip_ansible_lint']
+
 - name: 'Set M/Monit upstart script'
   template:
     src: mmonit.upstart
