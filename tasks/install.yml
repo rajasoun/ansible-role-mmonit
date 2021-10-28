@@ -90,6 +90,11 @@
   notify: reload initctl
   when: ansible_distribution == 'Ubuntu'
 
+- name: Reload upstart Configuration
+  ansible.builtin.service:
+    name: initctl 
+    state: reload-configuration
+
 - name: 'start M/Monit'
   service:
     name: 'mmonit'
