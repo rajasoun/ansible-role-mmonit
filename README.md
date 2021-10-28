@@ -30,7 +30,9 @@ $ cd multipass-wrapper
 $ ./assist.bash multipass setup
 $ ./assist.bash multipass status
 $ ./assist.bash multipass shell
+$ sudo apt-get update 
 $ sudo apt-get install ansible -y
+$ ansible-galaxy install rajasoun.ansible_role_mmonit
 $ ansible-playbook -i ~/.ansible/roles/rajasoun.ansible_role_mmonit/inventory ~/.ansible/roles/rajasoun.ansible_role_mmonit/local.yml
 
 ```

@@ -26,13 +26,6 @@
     state: directory
   when: mmonit_version != mmonit_current_version
 
-#- name: 'Download M/Monit'
-#  get_url:
-##    checksum: '{{ mmonit_download_checksum }}'
-#    url: '{{ mmonit_download_url }}'
-#    dest: '{{ mmonit_workspace }}/mmonit-latest.tar.gz'
-#  when: mmonit_version != mmonit_current_version
-
 - name: 'Unarchive mmonit-latest.tar.gz'
   register: mmonit_unarchive
   unarchive:
@@ -40,6 +33,17 @@
     dest: '{{ mmonit_workspace }}'
     copy: no
   when: mmonit_version != mmonit_current_version
+
+- name: 'Read trial license'
+  shell: "head -n -2 {{ mmonit_unarchive_dir }}/conf/server.xml | tail -n5 | awk '{$1=$1};1'"
+  register: mmonit_trial_license
+  changed_when: false
+  when: mmonit_license == ''
+
+- name: set trial license
+  set_fact:
+    mmonit_license: '{{ mmonit_trial_license.stdout }}'
+  when: mmonit_license == ''
 
 - name: 'Symlink M/Monit to /opt/mmonit'
   file:
@@ -49,9 +53,7 @@
     group: root
     mode: 0700
     state: link
-#    force: true
-
-- include_vars: "../files/license.yml"
+  changed_when: false # required for idempotence
 
 - name: 'Configure M/Monit'
   notify: restart mmonit
@@ -68,9 +70,8 @@
     and mmonit_version is defined
     and mmonit_version != ""
     and mmonit_current_version != ""
-    and mmonit_version | version_compare(mmonit_current_version, 'gt'))
+    and mmonit_version is version_compare(mmonit_current_version, 'gt'))
   tags: ['skip_ansible_lint']
-
 - name: 'Set M/Monit upstart script'
   template:
     src: mmonit.upstart
