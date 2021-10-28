@@ -77,8 +77,9 @@
   tags: ['skip_ansible_lint']
 
 - name: 'Create /etc/init For M/Monit upstart script'
-  shell: "mkdir -p /etc/init/"
-  when: ansible_distribution == 'Ubuntu'
+  file:
+    path: /etc/init
+    state: directory
 
 - name: 'Set M/Monit upstart script'
   template:
@@ -87,17 +88,12 @@
     owner: root
     group: root
     mode: '0644'
-  notify: reload initctl
+  notify: reload-configuration initctl
   when: ansible_distribution == 'Ubuntu'
-
-- name: Reload upstart Configuration
-  ansible.builtin.service:
-    name: initctl 
-    state: reload-configuration
 
 - name: 'start M/Monit'
   service:
     name: 'mmonit'
     state: started
     enabled: yes
-  changed_when: false # fix idempotence
+  changed_when: false 
