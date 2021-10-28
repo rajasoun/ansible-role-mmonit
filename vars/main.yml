@@ -3,5 +3,5 @@
 mmonit_workspace: '/opt'
 mmonit_executable: '{{ mmonit_workspace }}/mmonit/bin/mmonit'
 mmonit_pid_file: '{{ mmonit_workspace }}/mmonit/logs/mmonit.pid'
-mmonit_unarchive_dir: '{{ mmonit_workspace }}/mmonit'
-mmonit_ssl_path: '{{ mmonit_unarchive_dir }}/conf'
+mmonit_unarchive_dir: '{{ mmonit_workspace }}/mmonit-{{ mmonit_version }}'
+mmonit_ssl_path: '{{ mmonit_workspace }}/mmonit/conf'
