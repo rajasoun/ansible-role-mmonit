@@ -6,7 +6,6 @@
 
   vars:
     mmonit_workspace: "/opt"
-    mmonit_ssl_path: "{{ mmonit_workspace }}/conf"
     mmonit_setup_url: http://127.0.0.1:2811
 
     mmonit_server_ip: "{{ ansible_default_ipv4.address }}"
