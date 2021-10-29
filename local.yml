@@ -22,7 +22,7 @@
 
   tasks:
     - name: Display IPv4 Address
-      debug: mmonit_server_ip=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+      debug: vars=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
 
   roles:
     - role: '{{playbook_dir}}'
