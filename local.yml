@@ -8,7 +8,7 @@
     mmonit_setup_url: http://127.0.0.1:2811
     mmonit_workspace: '/opt'
 
-    mmonit_server_ip: '192.168.64.52'
+    mmonit_server_ip: "{{ ansible_default_ipv4.address }}"
     mmonit_server_hostname: 'mmonit'
 
   tasks:
