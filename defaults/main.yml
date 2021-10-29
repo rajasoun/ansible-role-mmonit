@@ -19,12 +19,12 @@ mmonit_connectors:
     port: 2811
     processors: 10
 
-#  - name: 'Secured'
-#    scheme: https
-#    address: '*'
-#    port: 8443
-#    processors: 10
-#    secure: true
+ - name: 'Secured'
+   scheme: https
+   address: '*'
+   port: 8443
+   processors: 10
+   secure: true
 
 
 mmonit_admin_username: 'admin'

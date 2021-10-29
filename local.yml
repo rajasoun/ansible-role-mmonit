@@ -13,9 +13,16 @@
         port: 2811
         processors: 10
         scheme: http
-        username: 'connector'
-        password: 'connector'
+        username: 'admin'
+        password: 'monit'
     mmonit_collector: "{{ mmonit_connectors.0.scheme | default('http') }}://{{ mmonit_connectors.0.username }}:{{ mmonit_connectors.0.password }}@{{ mmonit_server_ip }}:{{ mmonit_connectors.0.port }}/collector"
+
+    mmonit_server_ip: '127.0.0.1'
+    mmonit_server_hostname: 'mmonit'
+
+  tasks:
+    - name: Display IPv4 Address
+      debug: mmonit_server_ip=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
 
   roles:
     - role: '{{playbook_dir}}'
