@@ -37,13 +37,13 @@
     copy: no
   when: mmonit_version != mmonit_current_version
 
-- name: 'Read trial license'
+- name: 'Read License'
   shell: "head -n -2 {{ mmonit_unarchive_dir }}/conf/server.xml | tail -n5 | awk '{$1=$1};1'"
   register: mmonit_trial_license
   changed_when: false
   when: mmonit_license == ''
 
-- name: set trial license
+- name: Set  License
   set_fact:
     mmonit_license: '{{ mmonit_trial_license.stdout }}'
   when: mmonit_license == ''
