@@ -9,8 +9,9 @@ mmonit_license: ''
 
 mmonit_server_ip: ''
 mmonit_server_hostname: 'localhost'
-mmonit_ssl_certificate: ''
-mmonit_ssl_certificate_key: ''
+
+mmonit_ssl_certificate: 'ssl_certificate.crt'
+mmonit_ssl_certificate_key: 'ssl_certificate_key.key'
 
 mmonit_connectors:
   - name: 'Default'
