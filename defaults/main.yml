@@ -18,20 +18,16 @@ mmonit_connectors:
     address: '*'
     port: 2811
     processors: 10
-
-  - name: 'Secured'
-    scheme: https
-    address: '*'
-    port: 8443
-    processors: 10
-    secure: true
-
+    username: 'monit'
+    password: 'monit'
 
 mmonit_admin_username: 'admin'
 mmonit_admin_password: ''
 
-mmonit_connector_username: 'connector'
+mmonit_connector_username: 'monit'
 mmonit_connector_password: ''
 
 mmonit_setup_url: ':{{ mmonit_connectors.0.scheme }}://{{ mmonit_server_hostname }}:{{ mmonit_connectors.0.port }}'
 mmonit_dhparam_size: 2048
+
+
