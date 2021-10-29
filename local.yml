@@ -17,12 +17,12 @@
         password: 'monit'
     mmonit_collector: "{{ mmonit_connectors.0.scheme | default('http') }}://{{ mmonit_connectors.0.username }}:{{ mmonit_connectors.0.password }}@{{ mmonit_server_ip }}:{{ mmonit_connectors.0.port }}/collector"
 
-    mmonit_server_ip: '127.0.0.1'
+    mmonit_server_ip: '192.168.64.52'
     mmonit_server_hostname: 'mmonit'
 
   tasks:
     - name: Display IPv4 Address
-      debug: vars=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+      debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
 
   roles:
     - role: '{{playbook_dir}}'
