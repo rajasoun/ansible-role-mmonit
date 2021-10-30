@@ -22,15 +22,15 @@ mmonit_connectors:
   # - name: 'Secured'
   #   scheme: https
   #   address: '*'
-  #   port: 8443
+  #   port: 443
   #   processors: 10
   #   secure: true
   #   username: 'monit'
   #   password: 'monit'
   
 mmonit_ssl_path: "{{ mmonit_workspace }}/conf"
-mmonit_ssl_certificate: '${HOME}/ssl_certificate.crt' #'{{ mmonit_ssl_path}}/ssl_certificate.crt'
-mmonit_ssl_certificate_key: '${HOME}/ssl_certificate_key.key' #'{{ mmonit_ssl_path}}/ssl_certificate_key.key'
+mmonit_ssl_certificate: '' #'{{ mmonit_ssl_path}}/ssl_certificate.crt'
+mmonit_ssl_certificate_key: '' #'{{ mmonit_ssl_path}}/ssl_certificate_key.key'
 
 mmonit_admin_username: 'admin'
 mmonit_admin_password: ''
