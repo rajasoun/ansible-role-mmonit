@@ -20,7 +20,7 @@
   register: mmonit_ssl_dhparam
   changed_when: false
 
-- name: Generate monit.pem
+- name: Generate certificate.pem
   no_log: true
   notify: restart mmonit
   template:
