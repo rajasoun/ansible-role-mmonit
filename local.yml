@@ -20,6 +20,14 @@
   tasks:
     - name: Display IPv4 Address
       debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+    - name: "MMonit | Print Admin Password"
+      debug:
+        msg: "MMonit Admin Password {{ mmonit_admin_password }}"
+      when: mmonit_admin_password is defined
+    - name: "Monit | Print Connector Password"
+      debug:
+        msg: "Monit Connector Password {{ mmonit_connector_password }}"
+      when: mmonit_connector_password is defined    
 
   roles:
     - role: '{{playbook_dir}}'
