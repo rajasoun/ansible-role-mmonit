@@ -46,7 +46,9 @@ $ ansible-playbook -i ~/.ansible/roles/rajasoun.ansible_role_mmonit/inventory ~/
 ## Login
 --------------
 
+MMonit will be available in port 80 and 443 with automatic redirect from 80 to 443
+
 | Url | Username | Password |
 |--- |--- |--- |
-| http://www.example.org:2811 | admin | swordfish |
+| http://<server-name> | admin | swordfish |
 

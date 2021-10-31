@@ -14,7 +14,7 @@ mmonit_connectors:
   - name: 'Default'
     scheme: http
     address: '*'
-    port: 2811
+    port: 80
     processors: 10
     username: 'monit'
     password: 'monit'
@@ -22,7 +22,7 @@ mmonit_connectors:
   - name: 'Secured'
     scheme: https
     address: '*'
-    port: 8443
+    port: 443
     processors: 10
     secure: true
   
