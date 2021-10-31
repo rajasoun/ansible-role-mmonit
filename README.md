@@ -17,7 +17,8 @@ $ ansible-playbook -i ~/.ansible/roles/rajasoun.ansible_role_mmonit/inventory ~/
 ## Pre Requisites
 ------------
 
-An Ansible ready host.
+* An Ansible ready host.
+* Following Certificates `ssl_certificate.crt` and `ssl_certificate_key.key` available in directort `/etc/certs/ssl/`
 
 
 ## Test
@@ -25,14 +26,21 @@ An Ansible ready host.
 
 Use [Multipass](https://multipass.run/) for creating VM Locally
 
+1. Prepare Ansible Ready Host
 ```
 $ git clone https://github.com/rajasoun/multipass-wrapper
 $ cd multipass-wrapper
 $ ./assist.bash multipass setup
 $ ./assist.bash multipass status
 $ ./assist.bash multipass shell
-$ sudo apt-get update 
-$ sudo apt-get install ansible -y
+$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get install ansible -y
+```
+
+2. Copy SSL Certificates `ssl_certificate.crt` and `ssl_certificate_key.key` available in directort `/etc/certs/ssl/` inside VM
+
+3. Run Ansible Playbook 
+
+```
 $ ansible-galaxy install rajasoun.ansible_role_mmonit
 $ ansible-vault decrypt ~/.ansible/roles/rajasoun.ansible_role_mmonit/files/license.yml
 $ ansible-playbook -i ~/.ansible/roles/rajasoun.ansible_role_mmonit/inventory ~/.ansible/roles/rajasoun.ansible_role_mmonit/local.yml
