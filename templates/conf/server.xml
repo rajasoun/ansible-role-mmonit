@@ -281,7 +281,7 @@
                 Engine defaultHost attribute
             -->
             <!-- Host name="localhost" appBase="." -->
-            <Host name="{{ mmonit_server_hostname }}" appBase="." {%if mmonit_server_ip != '' %}address="{{ mmonit_server_ip }}"{% endif %}{%if mmonit_ssl_certificate != '' %} certificate="{{ mmonit_ssl_path }}/certificate.pem"{% endif %}>
+            <Host name="{{ mmonit_server_hostname }}" appBase="." {%if mmonit_server_ip != '' %}address="{{ mmonit_server_ip }}"{% endif %}{%if mmonit_ssl_certificate_path != '' %} certificate="{{ mmonit_ssl_path }}/certificate.pem"{% endif %}>
 
 
                 <!--
