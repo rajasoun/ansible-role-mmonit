@@ -20,6 +20,16 @@
   register: mmonit_ssl_dhparam
   changed_when: false
 
+- name: Read SSL Certificate
+  command: cat {{ mmonit_ssl_certificate_path }}]
+  register: mmonit_ssl_certificate
+  changed_when: false
+
+- name: Read SSL Key
+  command: cat {{ mmonit_ssl_certificate_key_path }}]
+  register: mmonit_ssl_certificate_key
+  changed_when: false
+
 - name: Generate certificate.pem
   no_log: true
   notify: restart mmonit

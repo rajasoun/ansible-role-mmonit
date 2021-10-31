@@ -27,8 +27,8 @@ mmonit_connectors:
     secure: true
   
 mmonit_ssl_path: "{{ mmonit_workspace }}/conf"
-mmonit_ssl_certificate: '/etc/certs/ssl/ssl_certificate.crt' 
-mmonit_ssl_certificate_key: '/etc/certs/ssl/ssl_certificate_key.key' 
+mmonit_ssl_certificate_path: '/etc/certs/ssl/ssl_certificate.crt' 
+mmonit_ssl_certificate_key_path: '/etc/certs/ssl/ssl_certificate_key.key' 
 
 mmonit_admin_username: 'admin'
 mmonit_admin_password: ''
