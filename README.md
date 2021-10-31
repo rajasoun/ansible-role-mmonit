@@ -37,6 +37,12 @@ $ sudo apt-get update && sudo apt-get upgrade && sudo apt-get install ansible -y
 ```
 
 2. Copy SSL Certificates `ssl_certificate.crt` and `ssl_certificate_key.key` available in directort `/etc/certs/ssl/` inside VM
+```
+sudo mkdir -p /etc/certs/ssl/
+sudo touch /etc/certs/ssl/ssl_certificate.crt
+sudo touch /etc/certs/ssl/ssl_certificate_key.key
+sudo chmod 0440 /etc/certs/ssl/
+```
 
 3. Run Ansible Playbook 
 
