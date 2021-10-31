@@ -14,8 +14,6 @@
     mmonit_admin_username: 'mmonit'
     mmonit_admin_password: "{{ ansible_machine_id | hash('sha1') | hash('sha1') }}"
 
-    mmonit_connector_username: 'monit'
-    mmonit_connector_password: "{{ ansible_machine_id | hash('sha1') }}"
 
   tasks:
     - name: Display IPv4 Address
@@ -24,10 +22,6 @@
       debug:
         msg: "MMonit Admin Password {{ mmonit_admin_password }}"
       when: mmonit_admin_password is defined
-    - name: "Monit | Print Connector Password"
-      debug:
-        msg: "Monit Connector Password {{ mmonit_connector_password }}"
-      when: mmonit_connector_password is defined    
 
   roles:
     - role: '{{playbook_dir}}'
