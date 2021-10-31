@@ -1,8 +1,10 @@
+- name: Secure mmonit with ssl
+  include: ssl.yml
+  tags: ['mmonit-ssl']
+
 - name: Install mmonit
   include: install.yml
   tags: ['mmonit-install']
 
-- name: Secure mmonit with ssl
-  include: ssl.yml
-  tags: ['mmonit-ssl']
+
 

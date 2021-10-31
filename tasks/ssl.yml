@@ -10,16 +10,6 @@
     mode: '0440'
   when: mmonit_ssl_path is defined
 
-- name: Generate dhparam.pem if it does not exist
-  openssl_dhparam:
-    path: '{{ mmonit_ssl_path }}/dhparam.pem'
-    size: '{{ mmonit_dhparam_size }}'
-
-- name: Read dhparam
-  command: cat {{ mmonit_ssl_path }}/dhparam.pem
-  register: mmonit_ssl_dhparam
-  changed_when: false
-
 - name: Read SSL Certificate
   command: cat {{ mmonit_ssl_certificate_path }}
   register: mmonit_ssl_certificate
