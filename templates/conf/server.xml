@@ -85,7 +85,13 @@
         -->
         {% if mmonit_connectors is defined %}
         {% for connector in mmonit_connectors -%}
-        <Connector address="{{ connector.address }}" port="{{ connector.port }}" processors="{{ connector.processors }}" {% if connector.secure is defined and connector.secure %}secure="true" {% elif %}redirectPort="443"{% endif %} />
+        <Connector address="{{ connector.address }}" 
+            port="{{ connector.port }}" 
+            processors="{{ connector.processors }}" 
+            {% if connector.secure is defined and connector.secure %}
+            secure="true" 
+            {% endif %} 
+        />
         {% endfor -%}
         {% endif %}
 
