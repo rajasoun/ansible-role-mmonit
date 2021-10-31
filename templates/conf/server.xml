@@ -90,7 +90,7 @@
             processors="{{ connector.processors }}" 
             {% if connector.secure is defined and connector.secure %}
             secure="true" 
-            {% elif %}
+            {% else %}
             redirectPort="443"
             {% endif %} 
         />
