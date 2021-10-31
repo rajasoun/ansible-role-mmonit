@@ -11,6 +11,9 @@
     mmonit_server_ip: "{{ ansible_default_ipv4.address }}"
     mmonit_server_hostname: "{{ ansible_hostname }}"
 
+    mmonit_admin_username: 'mmonit'
+    mmonit_admin_password: 'mmonit'
+
   tasks:
     - name: Display IPv4 Address
       debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']

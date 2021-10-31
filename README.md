@@ -58,5 +58,5 @@ MMonit will be available in port 80 and 443 with automatic redirect from 80 to 4
 
 | Url | Username | Password |
 |--- |--- |--- |
-| http://<server-name> | admin | swordfish |
+| http://<server-name> | mmonit | mmonit |
 

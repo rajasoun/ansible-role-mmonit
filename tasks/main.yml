@@ -6,5 +6,8 @@
   include: install.yml
   tags: ['mmonit-install']
 
+- name: Configure mmonit
+  include: configure.yml
+  tags: ['mmonit-install']
 
 
