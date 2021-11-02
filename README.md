@@ -3,6 +3,13 @@
 
 Ansible role for configuring M/Monit. 
 
+## Pre Requisites
+------------
+
+* An Ansible ready host.
+* Following Certificates available in directory `/etc/certs/ssl/`
+    * `ssl_certificate.crt` and 
+    * `ssl_certificate_key.key` 
 
 ## Install
 -------
@@ -13,13 +20,6 @@ $ ansible-galaxy install rajasoun.ansible_role_mmonit
 $ ansible-vault decrypt ~/.ansible/roles/rajasoun.ansible_role_mmonit/files/license.yml
 $ ansible-playbook -i ~/.ansible/roles/rajasoun.ansible_role_mmonit/inventory ~/.ansible/roles/rajasoun.ansible_role_mmonit/local.yml
 ```
-
-## Pre Requisites
-------------
-
-* An Ansible ready host.
-* Following Certificates `ssl_certificate.crt` and `ssl_certificate_key.key` available in directort `/etc/certs/ssl/`
-
 
 ## Test
 ------------
